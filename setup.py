@@ -1,10 +1,13 @@
 #!/data/data/com.termux/files/usr/bin/python3
 import os, json, shutil, subprocess, sys
-from lib.dialogs import *
+from lib.dialogs import filepicker
+from lib.dialogs import radiolist
+from lib.dialogs import inputbox
+from lib.dialogs import checklist
 
 # --- 1:1 prompts from screenshots ------------------------------
 proj_tipe   = radiolist("Pilih jenis proyek:", ["HTML Klasik","React"]) or "HTML Klasik"
-html_dir    = dselect("Pilih direktori HTML:", os.listdir("."))
+html_dir    = filepicker("Pilih direktori HTML:", os.listdir("."))
 app_nama    = inputbox("Nama aplikasi:", "Flapt Bird")
 app_id      = inputbox("App ID:", "com.example.flapy")
 versi       = inputbox("Versi aplikasi:", "1.0.0")
