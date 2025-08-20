@@ -1,7 +1,7 @@
 import subprocess, os
 
 def whiptail(args):
-    return subprocess.run(["whiptail","--backtitle","EyeFox Dashboard"] + args,
+    return subprocess.run(["dialog","--backtitle","EyeFox Dashboard","--stdout"] + args,
                           capture_output=True, text=True)
 
 def radiolist(title, items):
