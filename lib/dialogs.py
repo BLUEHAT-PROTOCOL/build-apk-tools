@@ -7,10 +7,10 @@ def _dialog(args):
 
 def radiolist(title, items):
     n = len(items)
-    menu = []
+    tag_items = []
     for idx, text in enumerate(items, 1):
-        menu += [str(idx), text, "OFF"]
-    res = _dialog(["--radiolist", title, str(n+7), "60", str(n)] + menu)
+        tag_items += [str(idx), text, "OFF"]
+    res = _dialog(["--radiolist", title, str(n+8), "60", str(n)] + tag_items)
     if res.returncode != 0 or not res.stdout.strip():
         return None
     try:
@@ -20,17 +20,17 @@ def radiolist(title, items):
 
 def checklist(title, items):
     n = len(items)
-    menu = []
+    tag_items = []
     for idx, text in enumerate(items, 1):
-        menu += [str(idx), text, "OFF"]
-    res = _dialog(["--checklist", title, str(n+7), "70", str(n)] + menu)
+        tag_items += [str(idx), text, "OFF"]
+    res = _dialog(["--checklist", title, str(n+8), "70", str(n)] + tag_items)
     if res.returncode != 0 or not res.stdout.strip():
         return []
     return [items[int(x)-1] for x in res.stdout.split()]
 
 def filepicker(title, files):
-    res = radiolist(title, files)
-    return files[res] if res is not None else None
+    choice = radiolist(title, files)
+    return files[choice] if choice is not None else None
 
 def msgbox(text):
     _dialog(["--msgbox", text, "10", "60"])
