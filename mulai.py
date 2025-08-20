@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/python3
 import os, sys, subprocess, json
 from lib.colors import *
-from lib.dialogs  import *
+from lib.dialogs import *
 
 VERSION = "22"
 AKTIF   = "3"
@@ -14,13 +14,7 @@ def banner():
 ╚══════════════════════════════════════════════╝{c0}""")
 
 def menu():
-    items = [
-        "Lihat Profil",
-        "Tanda Tangan APK",
-        "Buat Keystore",
-        "Build APK",
-        "Keluar"
-    ]
+    items = ["Lihat Profil", "Tanda Tangan APK", "Buat Keystore", "Build APK", "Keluar"]
     opt = radiolist("Pilih menu:", items)
     if   opt == 0: info()
     elif opt == 1: sign()
@@ -29,30 +23,29 @@ def menu():
     else:          sys.exit()
 
 def info():
-    msgbox(f"""Nama: EyeFox
-Token: {REF}
-Aktif: {AKTIF}
-Tidak Aktif: -""")
-    menu()
+    msgbox("Nama: EyeFox\nToken: {}\nAktif: {}\nTidak Aktif: -".format(REF, AKTIF))
 
 def sign():
-    apk = filepicker("Pilih APK yang akan ditandatangani:")
+    apks = [f for f in os.listdir('.') if f.endswith('.apk')]
+    if not apks:
+        msgbox("Tidak ada file APK di folder ini.")
+        return
+    apk = filepicker("Pilih APK yang akan ditandatangani:", apks)
     if apk:
         subprocess.run(["apksigner","sign","--ks","release.keystore",apk])
         msgbox("APK berhasil ditandatangani!")
-    menu()
 
 def keystore():
     from lib.keytool import make_keystore
     make_keystore()
     msgbox("Keystore berhasil dibuat!")
-    menu()
 
 def build():
-    subprocess.run([sys.executable,"setup.py"])
-    menu()
+    subprocess.run([sys.executable, "setup.py"])
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(__file__))
     banner()
-    menu()
+    while True:
+        menu()
+    
