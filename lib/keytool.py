@@ -6,8 +6,8 @@ def make_keystore():
     pw = getpass.getpass("Masukkan password keystore: ")
     dname = "CN=EyeFox, OU=Mobile, O=Android, L=Jakarta, C=ID"
     subprocess.run([
-        "keytool", "-genkey", "-v", "-keystore", "release.keystore", "-alias", "release",
-        "-keyalg", "RSA", "-keysize", "2048", "-validity", "10000",
-        "-dname", dname, "-storepass", pw, "-keypass", pw
+        "keytool", "-genkey", "-v", "-keystore", "release.keystore",
+        "-alias", "release", "-keyalg", "RSA", "-keysize", "2048",
+        "-validity", "10000", "-dname", dname, "-storepass", pw, "-keypass", pw
     ])
     
