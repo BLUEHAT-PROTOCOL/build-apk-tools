@@ -3,7 +3,10 @@
 # build-apk-tools
 
 Menu Utama	Build APK	Hasil	
+
 ![menu](https://placehold.co/200x120/000/fff?text=DASHBOARD)	![build](https://placehold.co/200x120/0a0/fff?text=BUILD+APK)	![apk](https://placehold.co/200x120/007/fff?text=APK+READY)	
+
+
 
 ⚙️ Fitur
 
@@ -18,6 +21,8 @@ Menu Utama	Build APK	Hasil
 ✅ Output APK siap dipasang:
   android/app/build/outputs/apk/debug/ 
 
+
+
 📦 Instalasi (Termux)
 
 pkg update && pkg upgrade -y
@@ -28,10 +33,13 @@ cd html-to-apk-termux
 chmod +x *.py
 ./mulai.py
 
+
 🧭 Cara Pakai
 1. Jalankan  ./mulai.py
 2. Pilih Build APK
 3. APK siap di  android/app/build/outputs/apk/debug/
+
+
 
 📁 Struktur Folder
 
@@ -44,13 +52,21 @@ build-apk/
 ├── templates/        # AndroidManifest & build.gradle
 └── README.md         # ini
 
+
+
 📜 Lisensi
 MIT – bebas modifikasi & redistribusi.
+
+
 
 🐛 Laporkan Bug / Fitur Baru
 Buka issue di tab “Issues” atau PR langsung.
 
+
+
 Happy building! 🛠️📱
 Dibuat dengan ❤️ di Termux.
+
+
 
 DEV: BLUEHATPROTOCOL 
