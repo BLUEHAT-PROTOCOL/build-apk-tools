@@ -50,15 +50,16 @@ def build():
 
 def build_from_url():
     url = inputbox("Masukkan URL situs:")
-    if not url: return
-    folder = url.split("//")[-1].split("/")[0]  # domain
+    if not url:
+        return
+    folder = url.split("//")[-1].split("/")[0]
     tempdir = os.path.join("temp", folder)
     shutil.rmtree(tempdir, ignore_errors=True)
     os.makedirs(tempdir, exist_ok=True)
     msgbox("Mengunduh situs…\n{}".format(url))
     subprocess.run(["wget","-r","-np","-nH","--cut-dirs=1","-P",tempdir,url])
-    # symlink agar setup.py lihat
     if os.path.isdir(tempdir):
+        shutil.rmtree("www", ignore_errors=True)           # <-- BARIS BARU
         os.symlink(os.path.abspath(tempdir), "www", target_is_directory=True)
         subprocess.run([sys.executable, "setup.py"])
         apk_path = "android/app/build/outputs/apk/debug/app-debug.apk"
