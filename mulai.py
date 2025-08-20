@@ -57,9 +57,12 @@ def build_from_url():
     shutil.rmtree(tempdir, ignore_errors=True)
     os.makedirs(tempdir, exist_ok=True)
     msgbox("Mengunduh situs…\n{}".format(url))
-    subprocess.run(["wget","-r","-np","-nH","--cut-dirs=1","-P",tempdir,url])
+    subprocess.run(["wget", "-r", "-np", "-nH", "--cut-dirs=1", "-P", tempdir, url])
     if os.path.isdir(tempdir):
-        shutil.rmtree("www", ignore_errors=True)           # <-- BARIS BARU
+        if os.path.islink("www") or os.path.isfile("www"):
+            os.unlink("www")
+        elif os.path.isdir("www"):
+            shutil.rmtree("www", ignore_errors=True)
         os.symlink(os.path.abspath(tempdir), "www", target_is_directory=True)
         subprocess.run([sys.executable, "setup.py"])
         apk_path = "android/app/build/outputs/apk/debug/app-debug.apk"
